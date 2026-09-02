@@ -147,9 +147,9 @@ function renderSurah(scrollToFirstAyah = false) {
 
     const header = `
         <div class="surah-header">
+            <h2 class="surah-arabic-name">${escapeHtml(tajweed.name)}</h2>
             <p class="surah-bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
             <p class="surah-bismillah-translation">${getWaqtLanguage() === "urdu" ? "اللہ کے نام سے جو نہایت مہربان، ہمیشہ رحم فرمانے والا ہے۔" : "In the name of Allah, the Most Gracious, the Most Merciful."}</p>
-            <h2 class="surah-arabic-name">${escapeHtml(tajweed.name)}</h2>
             <p class="surah-english-name">${escapeHtml(tajweed.englishName)} — ${escapeHtml(tajweed.englishNameTranslation)}</p>
             <p class="surah-meta">${escapeHtml(tajweed.revelationType)} &middot; ${tajweed.numberOfAyahs} verses</p>
             <div class="surah-audio-actions">

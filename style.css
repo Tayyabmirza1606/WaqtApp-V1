@@ -1023,7 +1023,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .surah-bismillah {
     font-family: var(--display-font);
-    font-size: 2em;
+    font-size: 1.6em;
     color: var(--cream);
     text-align: center;
     line-height: 1.2;
