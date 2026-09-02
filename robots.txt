@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tayyabmirza1606.github.io/WaqtApp-V1/sitemap.xml
+Sitemap: https://waqt-prayer-times.pages.dev/sitemap.xml
