@@ -1,151 +1,527 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO -->
     <title>Waqt Prayer Times | Accurate Salah Times by Location</title>
-    <meta name="description" content="Waqt provides accurate daily Islamic prayer times for your location, including Fajr, Dhuhr, Asr, Maghrib, and Isha, plus monthly timetables and Qibla tools.">
-    <link rel="canonical" href="https://tayyabmirza1606.github.io/WaqtApp-V1/">
+
+    <meta
+        name="description"
+        content="Waqt provides daily Islamic prayer times based on your location, including Fajr, Dhuhr, Asr, Maghrib and Isha, with Quran, Duas, Hadith and other Islamic tools."
+    >
+
+    <meta
+        name="robots"
+        content="index, follow, max-image-preview:large"
+    >
+
+    <meta name="author" content="Waqt">
+
+    <meta name="application-name" content="Waqt">
+
+    <meta name="theme-color" content="#0f766e">
+
+    <!-- Canonical URL -->
+    <link
+        rel="canonical"
+        href="https://tayyabmirza1606.github.io/WaqtApp-V1/"
+    >
+
+    <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Waqt Prayer Times">
-    <meta property="og:description" content="Find accurate Islamic prayer times for your city with Waqt.">
-    <meta property="og:url" content="https://tayyabmirza1606.github.io/WaqtApp-V1/">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Waqt Prayer Times">
-    <meta name="twitter:description" content="Find accurate Islamic prayer times for your city with Waqt.">
+
+    <meta
+        property="og:title"
+        content="Waqt Prayer Times | Accurate Salah Times by Location"
+    >
+
+    <meta
+        property="og:description"
+        content="Find daily Islamic prayer times based on your location with Waqt. View Fajr, Dhuhr, Asr, Maghrib and Isha times along with Quran, Duas, Hadith and other Islamic tools."
+    >
+
+    <meta
+        property="og:url"
+        content="https://tayyabmirza1606.github.io/WaqtApp-V1/"
+    >
+
+    <meta
+        property="og:site_name"
+        content="Waqt"
+    >
+
+    <meta
+        property="og:locale"
+        content="en_US"
+    >
+
+    <!-- Twitter / X -->
+    <meta
+        name="twitter:card"
+        content="summary"
+    >
+
+    <meta
+        name="twitter:title"
+        content="Waqt Prayer Times | Accurate Salah Times by Location"
+    >
+
+    <meta
+        name="twitter:description"
+        content="Daily Islamic prayer times based on your location, with Quran, Duas, Hadith and other useful Islamic tools."
+    >
+
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "Waqt Prayer Times",
+        "name": "Waqt",
         "url": "https://tayyabmirza1606.github.io/WaqtApp-V1/",
-        "description": "Accurate Islamic prayer times by location, with monthly timetables and Qibla tools.",
+        "description": "Waqt is an Islamic prayer time web application that provides daily Salah times based on location, along with Quran, Duas, Hadith and other Islamic tools.",
         "applicationCategory": "LifestyleApplication",
-        "operatingSystem": "Web"
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript",
+        "inLanguage": "en",
+        "featureList": [
+            "Daily Islamic prayer times",
+            "Fajr prayer time",
+            "Dhuhr prayer time",
+            "Asr prayer time",
+            "Maghrib prayer time",
+            "Isha prayer time",
+            "Location-based prayer times",
+            "Monthly prayer timetable",
+            "Quran",
+            "Duas",
+            "Hadith",
+            "Islamic Calendar",
+            "Qibla",
+            "Zakat Calculator"
+        ]
     }
     </script>
+
+    <!-- Performance / Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body data-page="home">
 
     <div class="app-layout">
 
         <!-- Sidebar navigation -->
         <div id="sidebar-placeholder"></div>
+
         <script src="sidebar.js"></script>
 
         <!-- Main content -->
         <div class="content-area">
 
-    <header class="app-header">
-        <div class="header-inner">
-            <h1 class="app-name">Waqt</h1>
-            <p class="app-tagline">وقت &middot; Time for prayer</p>
-        </div>
-    </header>
-
-    <main class="app-main">
-
-        <!-- Location controls -->
-        <section class="location-bar">
-            <div class="location-display" id="location-display">
-                <span class="location-icon">📍</span>
-                <span id="location-text">Detecting your location…</span>
-            </div>
-            <div class="location-actions">
-                <button id="detect-btn" class="btn-link">Use my location</button>
-                <span class="divider">|</span>
-                <button id="manual-toggle-btn" class="btn-link">Enter city</button>
-            </div>
-        </section>
-
-        <!-- Manual city entry (hidden by default) -->
-        <section class="manual-location-form" id="manual-form" hidden>
-            <input type="text" id="city-input" placeholder="City (e.g. Islamabad)">
-            <input type="text" id="country-input" placeholder="Country (e.g. Pakistan)">
-            <button id="manual-submit-btn" class="btn-primary">Set Location</button>
-        </section>
-
-        <!-- Date display -->
-        <section class="date-bar" id="date-bar">
-            <span id="gregorian-date">—</span>
-            <span class="date-sep">&middot;</span>
-            <span id="hijri-date">—</span>
-        </section>
-
-        <!-- Next prayer — signature mihrab-arch card -->
-        <section class="next-prayer-wrap" id="prayer-times">
-            <div class="mihrab-card" id="next-prayer-card">
-                <p class="next-prayer-label">Next Prayer</p>
-                <h2 class="next-prayer-name" id="next-prayer-name">—</h2>
-                <p class="next-prayer-countdown" id="next-prayer-countdown">—</p>
-                <p class="next-prayer-time" id="next-prayer-time">—</p>
-            </div>
-        </section>
-
-        <!-- All prayer times grid -->
-        <section class="timings-grid" id="timings-grid" aria-live="polite">
-            <!-- populated by JS -->
-        </section>
-
-        <!-- Calculation method -->
-        <section class="settings-bar">
-            <div class="setting-row">
-                <label for="method-select">Calculation method</label>
-                <select id="method-select">
-                    <option value="1">University of Islamic Sciences, Karachi</option>
-                    <option value="2">Islamic Society of North America (ISNA)</option>
-                    <option value="3">Muslim World League</option>
-                    <option value="4">Umm Al-Qura University, Makkah</option>
-                    <option value="5">Egyptian General Authority of Survey</option>
-                </select>
-            </div>
-            <div class="setting-row">
-                <label for="school-select">Asr juristic method</label>
-                <select id="school-select">
-                    <option value="0">Shafi / Maliki / Hanbali (standard)</option>
-                    <option value="1">Hanafi (later Asr)</option>
-                </select>
-            </div>
-        </section>
-
-        <!-- Monthly timetable -->
-        <section class="monthly-section">
-            <button id="monthly-toggle-btn" class="btn-secondary">View Monthly Timetable</button>
-            <div id="monthly-wrap" class="monthly-wrap" hidden>
-                <h3 class="monthly-title" id="monthly-title">—</h3>
-                <div class="monthly-table-scroll">
-                    <table class="monthly-table" id="monthly-table">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Fajr</th>
-                                <th>Sunrise</th>
-                                <th>Dhuhr</th>
-                                <th>Asr</th>
-                                <th>Maghrib</th>
-                                <th>Isha</th>
-                            </tr>
-                        </thead>
-                        <tbody id="monthly-tbody">
-                            <!-- populated by JS -->
-                        </tbody>
-                    </table>
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-inner">
+                    <h1 class="app-name">Waqt</h1>
+                    <p class="app-tagline">
+                        وقت &middot; Time for prayer
+                    </p>
                 </div>
-            </div>
-        </section>
+            </header>
 
-    </main>
+            <main class="app-main">
 
-    <footer class="app-footer">
-        <p>Prayer times may vary slightly from your local mosque. Data via <a href="https://aladhan.com" target="_blank" rel="noopener noreferrer">AlAdhan API</a>.</p>
-    </footer>
+                <!-- Location controls -->
+                <section class="location-bar">
+
+                    <div class="location-display" id="location-display">
+                        <span class="location-icon">📍</span>
+
+                        <span id="location-text">
+                            Detecting your location…
+                        </span>
+                    </div>
+
+                    <div class="location-actions">
+
+                        <button
+                            id="detect-btn"
+                            class="btn-link"
+                            type="button"
+                        >
+                            Use my location
+                        </button>
+
+                        <span class="divider">|</span>
+
+                        <button
+                            id="manual-toggle-btn"
+                            class="btn-link"
+                            type="button"
+                        >
+                            Enter city
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Manual city entry -->
+                <section
+                    class="manual-location-form"
+                    id="manual-form"
+                    hidden
+                >
+
+                    <input
+                        type="text"
+                        id="city-input"
+                        placeholder="City (e.g. Islamabad)"
+                        aria-label="City"
+                    >
+
+                    <input
+                        type="text"
+                        id="country-input"
+                        placeholder="Country (e.g. Pakistan)"
+                        aria-label="Country"
+                    >
+
+                    <button
+                        id="manual-submit-btn"
+                        class="btn-primary"
+                        type="button"
+                    >
+                        Set Location
+                    </button>
+
+                </section>
+
+
+                <!-- Date display -->
+                <section
+                    class="date-bar"
+                    id="date-bar"
+                    aria-label="Current date"
+                >
+
+                    <span id="gregorian-date">—</span>
+
+                    <span class="date-sep">&middot;</span>
+
+                    <span id="hijri-date">—</span>
+
+                </section>
+
+
+                <!-- Next prayer -->
+                <section
+                    class="next-prayer-wrap"
+                    id="prayer-times"
+                    aria-labelledby="next-prayer-heading"
+                >
+
+                    <div
+                        class="mihrab-card"
+                        id="next-prayer-card"
+                    >
+
+                        <p class="next-prayer-label">
+                            Next Prayer
+                        </p>
+
+                        <h2
+                            class="next-prayer-name"
+                            id="next-prayer-name"
+                        >
+                            —
+                        </h2>
+
+                        <p
+                            class="next-prayer-countdown"
+                            id="next-prayer-countdown"
+                        >
+                            —
+                        </p>
+
+                        <p
+                            class="next-prayer-time"
+                            id="next-prayer-time"
+                        >
+                            —
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- All prayer times -->
+                <section
+                    class="timings-grid"
+                    id="timings-grid"
+                    aria-label="Today's prayer times"
+                    aria-live="polite"
+                >
+                    <!-- populated by JS -->
+                </section>
+
+
+                <!-- Calculation method -->
+                <section class="settings-bar">
+
+                    <div class="setting-row">
+
+                        <label for="method-select">
+                            Calculation method
+                        </label>
+
+                        <select id="method-select">
+
+                            <option value="1">
+                                University of Islamic Sciences, Karachi
+                            </option>
+
+                            <option value="2">
+                                Islamic Society of North America (ISNA)
+                            </option>
+
+                            <option value="3">
+                                Muslim World League
+                            </option>
+
+                            <option value="4">
+                                Umm Al-Qura University, Makkah
+                            </option>
+
+                            <option value="5">
+                                Egyptian General Authority of Survey
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <label for="school-select">
+                            Asr juristic method
+                        </label>
+
+                        <select id="school-select">
+
+                            <option value="0">
+                                Shafi / Maliki / Hanbali (standard)
+                            </option>
+
+                            <option value="1">
+                                Hanafi (later Asr)
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Monthly timetable -->
+                <section class="monthly-section">
+
+                    <button
+                        id="monthly-toggle-btn"
+                        class="btn-secondary"
+                        type="button"
+                    >
+                        View Monthly Timetable
+                    </button>
+
+                    <div
+                        id="monthly-wrap"
+                        class="monthly-wrap"
+                        hidden
+                    >
+
+                        <h3
+                            class="monthly-title"
+                            id="monthly-title"
+                        >
+                            —
+                        </h3>
+
+                        <div class="monthly-table-scroll">
+
+                            <table
+                                class="monthly-table"
+                                id="monthly-table"
+                            >
+
+                                <thead>
+
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Fajr</th>
+                                        <th scope="col">Sunrise</th>
+                                        <th scope="col">Dhuhr</th>
+                                        <th scope="col">Asr</th>
+                                        <th scope="col">Maghrib</th>
+                                        <th scope="col">Isha</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="monthly-tbody">
+                                    <!-- populated by JS -->
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =====================================================
+                     SEO / INFORMATION SECTION
+                     ===================================================== -->
+                <section
+                    class="seo-content"
+                    aria-labelledby="about-waqt-title"
+                >
+
+                    <h2 id="about-waqt-title">
+                        Waqt – Daily Islamic Prayer Times
+                    </h2>
+
+                    <p>
+                        Waqt is a simple Islamic prayer time web app that
+                        helps you find daily Salah times based on your
+                        location. View Fajr, Sunrise, Dhuhr, Asr, Maghrib
+                        and Isha prayer times in one place.
+                    </p>
+
+                    <p>
+                        You can use your current location or enter a city
+                        manually to get prayer times for your area. Waqt
+                        also lets you choose different calculation methods
+                        and the Asr juristic method according to your
+                        preference.
+                    </p>
+
+
+                    <h3>
+                        Prayer Times for Your Location
+                    </h3>
+
+                    <p>
+                        Check today's Fajr, Dhuhr, Asr, Maghrib and Isha
+                        timings, see the next upcoming prayer, and view a
+                        monthly prayer timetable for your selected location.
+                    </p>
+
+
+                    <h3>
+                        Islamic Resources and Tools
+                    </h3>
+
+                    <p>
+                        Waqt brings useful Islamic resources and tools
+                        together in one place, including Quran, Duas,
+                        Hadith, Islamic Calendar, Qibla and a Zakat
+                        Calculator.
+                    </p>
+
+
+                    <!-- Internal links -->
+                    <nav
+                        aria-label="Islamic resources"
+                    >
+
+                        <ul>
+
+                            <li>
+                                <a href="quran.html">
+                                    Quran
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="duas.html">
+                                    Duas
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="hadith.html">
+                                    Hadith
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="islamic-calendar.html">
+                                    Islamic Calendar
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="qibla.html">
+                                    Qibla Direction
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="zakat-calculator.html">
+                                    Zakat Calculator
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </nav>
+
+                </section>
+
+            </main>
+
+
+            <!-- Footer -->
+            <footer class="app-footer">
+
+                <p>
+                    Prayer times may vary slightly from your local mosque.
+                    Data via
+                    <a
+                        href="https://aladhan.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        AlAdhan API
+                    </a>.
+                </p>
+
+            </footer>
 
         </div>
     </div>
 
+
+    <!-- Main JavaScript -->
     <script src="script.js"></script>
+
 </body>
 </html>
