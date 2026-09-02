@@ -110,7 +110,7 @@ async function loadSurahList() {
     }
 }
 
-async function loadSurah(surahNumber) {
+async function loadSurah(surahNumber, scrollToFirstAyah = false) {
     stopAudio();
     const container = document.getElementById("surah-content");
     container.innerHTML = `<p class="converter-loading">Loading surah…</p>`;
@@ -128,7 +128,7 @@ async function loadSurah(surahNumber) {
             tajweed: data.data[0],
             english: data.data[1],
         };
-        renderSurah();
+        renderSurah(scrollToFirstAyah);
     } catch (err) {
         console.error("Failed to load surah:", err);
         loadedSurah = null;
@@ -136,7 +136,7 @@ async function loadSurah(surahNumber) {
     }
 }
 
-function renderSurah() {
+function renderSurah(scrollToFirstAyah = false) {
     if (!loadedSurah) return;
 
     const { tajweed, english } = loadedSurah;
@@ -174,7 +174,10 @@ function renderSurah() {
     }).join("");
 
     container.innerHTML = header + ayahs;
-    container.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    if (scrollToFirstAyah) {
+        container.querySelector(".ayah-block")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 }
 
 function getAudioEl() {
@@ -253,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("load-surah-btn").addEventListener("click", () => {
         const surahNumber = document.getElementById("surah-select").value;
-        if (surahNumber) loadSurah(surahNumber);
+        if (surahNumber) loadSurah(surahNumber, true);
     });
 
     document.getElementById("reciter-select").addEventListener("change", () => {
