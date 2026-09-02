@@ -102,6 +102,8 @@ async function loadSurahList() {
         select.innerHTML = data.data.map((surah) =>
             `<option value="${surah.number}">${surah.number}. ${surah.englishName} (${surah.englishNameTranslation})</option>`
         ).join("");
+        select.value = "1";
+        await loadSurah(1);
     } catch (err) {
         console.error("Failed to load surah list:", err);
         select.innerHTML = `<option value="">Couldn't load surah list</option>`;
