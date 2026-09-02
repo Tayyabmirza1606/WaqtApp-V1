@@ -29,26 +29,59 @@ function loadSavedLocation() {
 }
 
 function detectLocation() {
-    document.getElementById("location-text").textContent = "Detecting your location…";
+    const locationText = document.getElementById("location-text");
+
+    locationText.textContent = "Detecting your location…";
 
     if (!navigator.geolocation) {
-        showManualForm("Geolocation isn't supported on this browser — please enter your city.");
+        showManualForm(
+            "Geolocation isn't supported by this browser — please enter your city."
+        );
         return;
     }
 
     navigator.geolocation.getCurrentPosition(
         (position) => {
+            console.log("Geolocation success:", position.coords);
+
             const location = {
                 type: "coords",
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
                 label: "Your current location",
             };
+
             saveLocation(location);
             loadPrayerTimes(location);
         },
-        () => {
-            showManualForm("Couldn't access your location — please enter your city instead.");
+        (error) => {
+            console.warn("Geolocation error:", error);
+
+            let message;
+
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    message = "Location permission was denied — please enter your city.";
+                    break;
+
+                case error.POSITION_UNAVAILABLE:
+                    message = "Your location is currently unavailable — please enter your city.";
+                    break;
+
+                case error.TIMEOUT:
+                    message = "Location detection timed out — please enter your city.";
+                    break;
+
+                default:
+                    message = "Couldn't detect your location — please enter your city.";
+            }
+
+            showManualForm(message);
+        },
+        {
+            enableHighAccuracy: false,
+            timeout: 10000,
+            maximumAge: 300000
         }
     );
 }
