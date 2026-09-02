@@ -19,7 +19,7 @@ const COLLECTION_NAMES = {
     muslim: "Sahih Muslim",
 };
 
-let allHadiths = [];   // full loaded collection: [{ number, english, arabic, book }]
+let allHadiths = [];   // full loaded collection: [{ number, english, urdu, arabic, book }]
 let chapters = [];     // [{ bookNumber, title, first, last, count }]
 let filteredHadiths = [];
 let renderedCount = 0;
@@ -52,23 +52,27 @@ async function loadCollection(collection) {
     currentView = "chapters";
 
     try {
-        const [englishRes, arabicRes] = await Promise.all([
+        const [englishRes, arabicRes, urduRes] = await Promise.all([
             fetchWithTimeout(`${HADITH_BASE}/eng-${collection}.json`),
             fetchWithTimeout(`${HADITH_BASE}/ara-${collection}.json`),
+            fetchWithTimeout(`${HADITH_BASE}/urd-${collection}.json`),
         ]);
 
         if (!englishRes.ok) throw new Error(`English edition returned ${englishRes.status}`);
 
         const englishData = await englishRes.json();
         const arabicData = arabicRes.ok ? await arabicRes.json() : null;
+        const urduData = urduRes.ok ? await urduRes.json() : null;
 
         const englishList = englishData.hadiths || [];
         const arabicList = arabicData ? (arabicData.hadiths || []) : [];
+        const urduList = urduData ? (urduData.hadiths || []) : [];
         const sectionTitles = (englishData.metadata && englishData.metadata.sections) || {};
 
         allHadiths = englishList.map((h, i) => ({
             number: h.hadithnumber,
             english: h.text,
+            urdu: urduList[i] ? urduList[i].text : null,
             arabic: arabicList[i] ? arabicList[i].text : null,
             book: h.reference && h.reference.book != null ? h.reference.book : null,
         }));
@@ -152,9 +156,11 @@ function openChapter(bookKey, collection) {
 
 function renderHadithCard(hadith, collection) {
     const hasEnglishText = hadith.english && hadith.english.trim().length > 0;
+    const translation = getWaqtLanguage() === "urdu" ? hadith.urdu : hadith.english;
+    const hasTranslation = translation && translation.trim().length > 0;
     const hasArabicText = hadith.arabic && hadith.arabic.trim().length > 0;
 
-    if (!hasEnglishText && !hasArabicText) {
+    if (!hasTranslation && !hasArabicText) {
         return `
             <div class="hadith-card hadith-card-empty">
                 <p class="hadith-collection-label">${COLLECTION_NAMES[collection]} — Hadith ${hadith.number}</p>
@@ -167,7 +173,7 @@ function renderHadithCard(hadith, collection) {
         <div class="hadith-card">
             <p class="hadith-collection-label">${COLLECTION_NAMES[collection]} — Hadith ${hadith.number}</p>
             ${hasArabicText ? `<p class="hadith-arabic">${hadith.arabic}</p>` : ""}
-            ${hasEnglishText ? `<p class="hadith-english">${hadith.english}</p>` : ""}
+            ${hasTranslation ? `<p class="hadith-english">${translation}</p>` : (hasEnglishText ? `<p class="hadith-english">${hadith.english}</p>` : "")}
         </div>
     `;
 }
@@ -242,6 +248,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("hadith-search-input").addEventListener("input", handleSearchInput);
 
     document.getElementById("load-more-btn").addEventListener("click", () => {
+        renderNextPage(collectionSelect.value);
+    });
+
+    document.addEventListener("waqt-language-change", () => {
+        if (currentView === "chapters") {
+            renderChapterList(collectionSelect.value);
+            return;
+        }
+        document.getElementById("hadith-list").innerHTML = "";
+        renderedCount = 0;
         renderNextPage(collectionSelect.value);
     });
 

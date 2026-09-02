@@ -117,16 +117,17 @@ async function loadSurah(surahNumber, scrollToFirstAyah = false) {
 
     try {
         const response = await fetch(
-            `${QURAN_API_BASE}/surah/${surahNumber}/editions/quran-tajweed,en.sahih`
+            `${QURAN_API_BASE}/surah/${surahNumber}/editions/quran-tajweed,en.sahih,ur.jalandhry`
         );
         const data = await response.json();
-        if (data.code !== 200 || !Array.isArray(data.data) || data.data.length < 2) {
+        if (data.code !== 200 || !Array.isArray(data.data) || data.data.length < 3) {
             throw new Error("Unexpected API response");
         }
 
         loadedSurah = {
             tajweed: data.data[0],
             english: data.data[1],
+            urdu: data.data[2],
         };
         renderSurah(scrollToFirstAyah);
     } catch (err) {
@@ -142,9 +143,12 @@ function renderSurah(scrollToFirstAyah = false) {
     const { tajweed, english } = loadedSurah;
     const container = document.getElementById("surah-content");
     const showTajweed = isTajweedEnabled();
+    const translation = getWaqtLanguage() === "urdu" ? loadedSurah.urdu : english;
 
     const header = `
         <div class="surah-header">
+            <p class="surah-bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+            <p class="surah-bismillah-translation">${getWaqtLanguage() === "urdu" ? "اللہ کے نام سے جو نہایت مہربان، ہمیشہ رحم فرمانے والا ہے۔" : "In the name of Allah, the Most Gracious, the Most Merciful."}</p>
             <h2 class="surah-arabic-name">${escapeHtml(tajweed.name)}</h2>
             <p class="surah-english-name">${escapeHtml(tajweed.englishName)} — ${escapeHtml(tajweed.englishNameTranslation)}</p>
             <p class="surah-meta">${escapeHtml(tajweed.revelationType)} &middot; ${tajweed.numberOfAyahs} verses</p>
@@ -159,7 +163,7 @@ function renderSurah(scrollToFirstAyah = false) {
         const arabicHtml = showTajweed
             ? parseTajweed(ayah.text)
             : escapeHtml(stripTajweedMarkup(ayah.text));
-        const translation = english.ayahs[i] ? english.ayahs[i].text : "";
+        const ayahTranslation = translation.ayahs[i] ? translation.ayahs[i].text : "";
 
         return `
             <div class="ayah-block" data-ayah-index="${i}" data-ayah-number="${ayah.number}">
@@ -168,7 +172,7 @@ function renderSurah(scrollToFirstAyah = false) {
                     <span class="ayah-toolbar-label">Ayah ${ayah.numberInSurah}</span>
                 </div>
                 <p class="ayah-arabic">${arabicHtml} <span class="ayah-number">﴿${ayah.numberInSurah}﴾</span></p>
-                <p class="ayah-translation">${escapeHtml(translation)}</p>
+                <p class="ayah-translation">${escapeHtml(ayahTranslation)}</p>
             </div>
         `;
     }).join("");
@@ -274,6 +278,10 @@ document.addEventListener("DOMContentLoaded", () => {
         renderSurah();
         if (wasPlaying) playAyah(keepIndex, keepThrough);
         else if (keepIndex >= 0) setPlayingState(keepIndex);
+    });
+
+    document.addEventListener("waqt-language-change", () => {
+        if (loadedSurah) renderSurah();
     });
 
     document.getElementById("tajweed-legend-btn").addEventListener("click", () => {

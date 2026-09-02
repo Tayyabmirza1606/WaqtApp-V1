@@ -25,6 +25,14 @@
 
             <main class="page-main page-main-wide">
 
+                <div class="language-picker">
+                    <label for="language-select">Translation language</label>
+                    <select id="language-select">
+                        <option value="urdu">Urdu</option>
+                        <option value="english">English</option>
+                    </select>
+                </div>
+
                 <div class="quran-picker">
                     <select id="surah-select" aria-label="Choose a surah">
                         <option value="">Loading surahs…</option>
@@ -68,6 +76,7 @@
         </div>
     </div>
 
+    <script src="language.js"></script>
     <script src="quran.js"></script>
 </body>
 </html>

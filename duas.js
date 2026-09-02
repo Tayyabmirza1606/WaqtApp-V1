@@ -11,12 +11,16 @@ function slugify(text) {
     return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
-function renderDuaCard(dua) {
+function renderDuaCard(dua, index) {
+    const translation = getWaqtLanguage() === "urdu"
+        ? DUA_URDU_TRANSLATIONS[index]
+        : dua.translation;
+
     return `
         <article class="dua-card">
             <p class="dua-arabic">${dua.arabic}</p>
             <p class="dua-transliteration">${dua.transliteration}</p>
-            <p class="dua-translation">${dua.translation}</p>
+            <p class="dua-translation">${translation || dua.translation}</p>
             <p class="dua-reference">${dua.reference}</p>
         </article>
     `;
@@ -71,9 +75,10 @@ function renderDuas() {
                 ${category}
             </h2>
 
-            ${grouped[category].map(renderDuaCard).join("")}
+            ${grouped[category].map((dua) => renderDuaCard(dua, DUAS.indexOf(dua))).join("")}
         `;
     }).join("");
 }
 
 document.addEventListener("DOMContentLoaded", renderDuas);
+document.addEventListener("waqt-language-change", renderDuas);

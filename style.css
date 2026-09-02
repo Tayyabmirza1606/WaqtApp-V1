@@ -517,6 +517,26 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     padding: 28px 20px 60px;
 }
 
+.language-picker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.language-picker label {
+    color: var(--ink-soft);
+    font-size: 0.9em;
+}
+
+.language-picker select {
+    padding: 10px 12px;
+    border: 1px solid var(--sand);
+    border-radius: 8px;
+    font-family: inherit;
+    background: #fff;
+}
+
 /* ============================
    Zakat Calculator
    ============================ */
@@ -999,6 +1019,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     font-family: inherit;
     font-size: 0.95em;
     background: #fff;
+}
+
+.surah-bismillah {
+    font-family: var(--display-font);
+    font-size: 2em;
+    color: var(--green);
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.surah-bismillah-translation {
+    color: var(--ink-soft);
+    text-align: center;
+    margin-bottom: 16px;
 }
 
 .quran-tools {
