@@ -1196,7 +1196,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     font-size: 1.5em;
     text-align: right;
     direction: rtl;
-    line-height: 2.1;
+    line-height: 2;
     margin-bottom: 10px;
 }
 
@@ -1208,6 +1208,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .ayah-number { color: var(--gold); font-size: 0.7em; }
 
 .ayah-translation { color: var(--ink-soft); font-size: 0.95em; }
+
+.translation-urdu {
+    direction: rtl;
+    text-align: right;
+}
 
 /* Official AlQuran Cloud tajweed colors */
 .tajweed.ham_wasl,
@@ -1366,7 +1371,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 @media (max-width: 560px) {
-    .ayah-arabic { font-size: 1.2em; }
+    .ayah-arabic { font-size: 1.3em; }
     .hadith-arabic { font-size: 1.1em; }
 }
 

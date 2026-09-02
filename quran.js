@@ -176,7 +176,7 @@ function renderSurah(scrollToFirstAyah = false) {
     const bismillah = `
         <div class="ayah-bismillah">
             <p class="surah-bismillah">${parseTajweed(loadedSurah.bismillah.arabic)}</p>
-            <p class="surah-bismillah-translation">${escapeHtml(bismillahTranslation)}</p>
+            <p class="surah-bismillah-translation ${getWaqtLanguage() === "urdu" ? "translation-urdu" : ""}">${escapeHtml(bismillahTranslation)}</p>
         </div>
     `;
 
@@ -193,7 +193,7 @@ function renderSurah(scrollToFirstAyah = false) {
                     <span class="ayah-toolbar-label">Ayah ${i + 1}</span>
                 </div>
                 <p class="ayah-arabic">${arabicHtml} <span class="ayah-number">﴿${i + 1}﴾</span></p>
-                <p class="ayah-translation">${escapeHtml(ayahTranslation)}</p>
+                <p class="ayah-translation ${getWaqtLanguage() === "urdu" ? "translation-urdu" : ""}">${escapeHtml(ayahTranslation)}</p>
             </div>
         `;
     }).join("");

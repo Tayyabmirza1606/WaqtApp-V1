@@ -20,7 +20,7 @@ function renderDuaCard(dua, index) {
         <article class="dua-card">
             <p class="dua-arabic">${dua.arabic}</p>
             <p class="dua-transliteration">${dua.transliteration}</p>
-            <p class="dua-translation">${translation || dua.translation}</p>
+            <p class="dua-translation ${getWaqtLanguage() === "urdu" ? "translation-urdu" : ""}">${translation || dua.translation}</p>
             <p class="dua-reference">${dua.reference}</p>
         </article>
     `;

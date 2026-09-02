@@ -173,7 +173,7 @@ function renderHadithCard(hadith, collection) {
         <div class="hadith-card">
             <p class="hadith-collection-label">${COLLECTION_NAMES[collection]} — Hadith ${hadith.number}</p>
             ${hasArabicText ? `<p class="hadith-arabic">${hadith.arabic}</p>` : ""}
-            ${hasTranslation ? `<p class="hadith-english">${translation}</p>` : (hasEnglishText ? `<p class="hadith-english">${hadith.english}</p>` : "")}
+            ${hasTranslation ? `<p class="hadith-english ${getWaqtLanguage() === "urdu" ? "translation-urdu" : ""}">${translation}</p>` : (hasEnglishText ? `<p class="hadith-english">${hadith.english}</p>` : "")}
         </div>
     `;
 }
