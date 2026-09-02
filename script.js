@@ -28,6 +28,25 @@ function loadSavedLocation() {
     }
 }
 
+async function getCoordinateLabel(latitude, longitude) {
+    const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Reverse geocoding returned ${response.status}`);
+
+        const data = await response.json();
+        const locality = data.locality || data.city || data.principalSubdivision;
+        const country = data.countryName;
+
+        if (locality && country) return `${locality}, ${country}`;
+        return locality || country || "Your current location";
+    } catch (error) {
+        console.warn("Couldn't determine city name:", error);
+        return "Your current location";
+    }
+}
+
 function detectLocation() {
     const locationText = document.getElementById("location-text");
 
@@ -41,16 +60,17 @@ function detectLocation() {
     }
 
     navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
             console.log("Geolocation success:", position.coords);
 
             const location = {
                 type: "coords",
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
-                label: "Your current location",
+                label: "Looking up your city…",
             };
 
+            location.label = await getCoordinateLabel(location.latitude, location.longitude);
             saveLocation(location);
             loadPrayerTimes(location);
         },
@@ -350,7 +370,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const savedLocation = loadSavedLocation();
     if (savedLocation) {
-        loadPrayerTimes(savedLocation);
+        if (savedLocation.type === "coords" && savedLocation.label === "Your current location") {
+            getCoordinateLabel(savedLocation.latitude, savedLocation.longitude).then((label) => {
+                savedLocation.label = label;
+                saveLocation(savedLocation);
+                loadPrayerTimes(savedLocation);
+            });
+        } else {
+            loadPrayerTimes(savedLocation);
+        }
     } else {
         detectLocation();
     }
