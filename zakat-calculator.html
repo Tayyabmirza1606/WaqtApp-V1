@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zakat Calculator | Waqt</title>
+    <meta name="description" content="Calculate your Zakat based on cash, gold, silver, business assets, and debts.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="zakat">
+
+    <div class="app-layout">
+
+        <div id="sidebar-placeholder"></div>
+        <script src="sidebar.js"></script>
+
+        <div class="content-area">
+
+            <header class="page-hero">
+                <h1 class="page-hero-title">Zakat Calculator</h1>
+                <p class="page-hero-sub">Estimate your annual Zakat obligation — 2.5% of qualifying wealth held above the Nisab threshold for one lunar year.</p>
+            </header>
+
+            <main class="page-main">
+
+                <section class="zakat-form-card">
+                    <h2 class="zakat-section-title">Nisab Threshold</h2>
+                    <p class="zakat-hint">Nisab is the minimum wealth required before Zakat is due. Choose which standard to use, and enter the current price per gram in your currency.</p>
+
+                    <div class="zakat-row">
+                        <label>
+                            <input type="radio" name="nisab-type" value="silver" checked>
+                            Silver standard (612.36g) — commonly used, lower threshold
+                        </label>
+                        <label>
+                            <input type="radio" name="nisab-type" value="gold">
+                            Gold standard (87.48g)
+                        </label>
+                    </div>
+
+                    <div class="zakat-field">
+                        <label for="metal-price">Current price per gram (your currency)</label>
+                        <input type="number" id="metal-price" placeholder="e.g. 280" min="0">
+                    </div>
+
+                    <h2 class="zakat-section-title">Zakatable Assets</h2>
+                    <p class="zakat-hint">Enter the current value of each category you hold. Leave blank or 0 if not applicable.</p>
+
+                    <div class="zakat-field">
+                        <label for="cash">Cash &amp; bank balances</label>
+                        <input type="number" id="cash" min="0" placeholder="0">
+                    </div>
+                    <div class="zakat-field">
+                        <label for="gold-value">Gold &amp; jewelry (current market value)</label>
+                        <input type="number" id="gold-value" min="0" placeholder="0">
+                    </div>
+                    <div class="zakat-field">
+                        <label for="silver-value">Silver (current market value)</label>
+                        <input type="number" id="silver-value" min="0" placeholder="0">
+                    </div>
+                    <div class="zakat-field">
+                        <label for="investments">Investments, stocks &amp; savings</label>
+                        <input type="number" id="investments" min="0" placeholder="0">
+                    </div>
+                    <div class="zakat-field">
+                        <label for="business">Business inventory &amp; assets</label>
+                        <input type="number" id="business" min="0" placeholder="0">
+                    </div>
+                    <div class="zakat-field">
+                        <label for="other-assets">Other zakatable assets</label>
+                        <input type="number" id="other-assets" min="0" placeholder="0">
+                    </div>
+
+                    <h2 class="zakat-section-title">Liabilities</h2>
+                    <div class="zakat-field">
+                        <label for="debts">Debts due within the year</label>
+                        <input type="number" id="debts" min="0" placeholder="0">
+                    </div>
+
+                    <button id="calculate-btn" class="btn-primary zakat-calc-btn">Calculate Zakat</button>
+                </section>
+
+                <section class="zakat-result-card" id="zakat-result" hidden>
+                    <!-- populated by JS -->
+                </section>
+
+                <p class="zakat-disclaimer">This calculator provides a general estimate. For specific rulings on your situation (e.g. mixed-use assets, agricultural Zakat, or differing madhab opinions), please consult a qualified scholar.</p>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="zakat.js"></script>
+</body>
+</html>

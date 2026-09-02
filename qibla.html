@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qibla Direction | Waqt</title>
+    <meta name="description" content="Find the direction of the Qibla (towards the Kaaba in Makkah) from your location.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="qibla">
+
+    <div class="app-layout">
+
+        <div id="sidebar-placeholder"></div>
+        <script src="sidebar.js"></script>
+
+        <div class="content-area">
+
+            <header class="page-hero">
+                <h1 class="page-hero-title">Qibla Direction</h1>
+                <p class="page-hero-sub">Find the direction of the Kaaba in Makkah from your location.</p>
+            </header>
+
+            <main class="page-main">
+
+                <section class="location-bar">
+                    <div class="location-display" id="qibla-location-display">
+                        <span class="location-icon">📍</span>
+                        <span id="qibla-location-text">Detecting your location…</span>
+                    </div>
+                    <div class="location-actions">
+                        <button id="qibla-detect-btn" class="btn-link">Use my location</button>
+                        <span class="divider">|</span>
+                        <button id="qibla-manual-toggle-btn" class="btn-link">Enter city</button>
+                    </div>
+                </section>
+
+                <section class="manual-location-form" id="qibla-manual-form" hidden>
+                    <input type="text" id="qibla-city-input" placeholder="City (e.g. Islamabad)">
+                    <input type="text" id="qibla-country-input" placeholder="Country (e.g. Pakistan)">
+                    <button id="qibla-manual-submit-btn" class="btn-primary">Set Location</button>
+                </section>
+
+                <section class="qibla-compass-wrap">
+                    <div class="qibla-compass">
+                        <div class="qibla-compass-ring">
+                            <span class="compass-label compass-n">N</span>
+                            <span class="compass-label compass-e">E</span>
+                            <span class="compass-label compass-s">S</span>
+                            <span class="compass-label compass-w">W</span>
+                            <div class="qibla-needle" id="qibla-needle">
+                                <span class="qibla-needle-kaaba">🕋</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="qibla-bearing" id="qibla-bearing">—</p>
+                    <p class="qibla-distance" id="qibla-distance"></p>
+                </section>
+
+                <section class="qibla-instructions">
+                    <h2 class="zakat-section-title">How to use this</h2>
+                    <p>This shows the Qibla bearing measured clockwise from true North. Hold your phone flat, open a separate compass app to find true North, then rotate yourself so the Kaaba icon points in the bearing direction shown above.</p>
+                    <p class="qibla-note">Note: this is a calculated bearing, not a live magnetic compass — it doesn't use your device's built-in sensor.</p>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="qibla.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Converter | Waqt</title>
+    <meta name="description" content="Convert dates between the Gregorian and Hijri (Islamic) calendars.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="date-converter">
+
+    <div class="app-layout">
+
+        <div id="sidebar-placeholder"></div>
+        <script src="sidebar.js"></script>
+
+        <div class="content-area">
+
+            <header class="page-hero">
+                <h1 class="page-hero-title">Date Converter</h1>
+                <p class="page-hero-sub">Convert dates between the Gregorian and Hijri (Islamic) calendars.</p>
+            </header>
+
+            <main class="page-main">
+
+                <div class="converter-tabs">
+                    <button class="converter-tab active" data-mode="g-to-h">Gregorian → Hijri</button>
+                    <button class="converter-tab" data-mode="h-to-g">Hijri → Gregorian</button>
+                </div>
+
+                <!-- Gregorian to Hijri -->
+                <section class="converter-card" id="g-to-h-form">
+                    <div class="zakat-field">
+                        <label for="greg-date">Gregorian date</label>
+                        <input type="date" id="greg-date">
+                    </div>
+                    <button id="convert-g-to-h-btn" class="btn-primary zakat-calc-btn">Convert</button>
+                </section>
+
+                <!-- Hijri to Gregorian -->
+                <section class="converter-card" id="h-to-g-form" hidden>
+                    <div class="converter-hijri-row">
+                        <div class="zakat-field">
+                            <label for="hijri-day">Day</label>
+                            <input type="number" id="hijri-day" min="1" max="30" placeholder="1">
+                        </div>
+                        <div class="zakat-field">
+                            <label for="hijri-month">Month</label>
+                            <select id="hijri-month">
+                                <option value="1">Muharram</option>
+                                <option value="2">Safar</option>
+                                <option value="3">Rabi' al-Awwal</option>
+                                <option value="4">Rabi' al-Thani</option>
+                                <option value="5">Jumada al-Awwal</option>
+                                <option value="6">Jumada al-Thani</option>
+                                <option value="7">Rajab</option>
+                                <option value="8">Sha'ban</option>
+                                <option value="9">Ramadan</option>
+                                <option value="10">Shawwal</option>
+                                <option value="11">Dhu al-Qi'dah</option>
+                                <option value="12">Dhu al-Hijjah</option>
+                            </select>
+                        </div>
+                        <div class="zakat-field">
+                            <label for="hijri-year">Year (AH)</label>
+                            <input type="number" id="hijri-year" placeholder="1447">
+                        </div>
+                    </div>
+                    <button id="convert-h-to-g-btn" class="btn-primary zakat-calc-btn">Convert</button>
+                </section>
+
+                <section class="converter-result" id="converter-result" hidden></section>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="date-converter.js"></script>
+</body>
+</html>

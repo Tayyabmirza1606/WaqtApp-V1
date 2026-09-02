@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon | Waqt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-layout">
+
+        <div id="sidebar-placeholder"></div>
+        <script src="sidebar.js"></script>
+
+        <div class="content-area">
+            <section class="coming-soon-page">
+                <span class="coming-soon-icon">☾</span>
+                <h1 id="feature-title">This feature</h1>
+                <p>is coming soon — we're building this out next.</p>
+                <a href="index.html" class="btn-primary">Back to Prayer Times</a>
+            </section>
+        </div>
+
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const feature = params.get("feature");
+        if (feature) {
+            document.getElementById("feature-title").textContent = feature;
+            document.title = `${feature} — Coming Soon | Waqt`;
+        }
+    </script>
+</body>
+</html>

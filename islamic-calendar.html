@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islamic Calendar | Waqt</title>
+    <meta name="description" content="View the Hijri Islamic calendar alongside the Gregorian calendar, month by month.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="islamic-calendar">
+
+    <div class="app-layout">
+
+        <div id="sidebar-placeholder"></div>
+        <script src="sidebar.js"></script>
+
+        <div class="content-area">
+
+            <header class="page-hero">
+                <h1 class="page-hero-title">Islamic Calendar</h1>
+                <p class="page-hero-sub">Browse the Hijri calendar month by month, with Gregorian dates side by side.</p>
+            </header>
+
+            <main class="page-main page-main-wide">
+
+                <div class="calendar-nav">
+                    <button id="prev-month-btn" class="btn-link">&larr; Previous</button>
+                    <h2 class="calendar-month-title" id="calendar-month-title">—</h2>
+                    <button id="next-month-btn" class="btn-link">Next &rarr;</button>
+                </div>
+
+                <div class="calendar-grid-wrap">
+                    <div class="calendar-weekdays">
+                        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                    </div>
+                    <div class="calendar-grid" id="calendar-grid">
+                        <!-- populated by JS -->
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="islamic-calendar.js"></script>
+</body>
+</html>

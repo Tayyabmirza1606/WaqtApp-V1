@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islamic Gallery | Waqt</title>
+    <meta name="description" content="Photos of significant Islamic landmarks, properly licensed via Wikimedia Commons.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Amiri+Quran&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="gallery">
+
+    <div class="app-layout">
+
+        <div id="sidebar-placeholder"></div>
+        <script src="sidebar.js"></script>
+
+        <div class="content-area">
+
+            <header class="page-hero">
+                <h1 class="page-hero-title">Islamic Gallery</h1>
+                <p class="page-hero-sub">Significant Islamic landmarks, with properly licensed and attributed photography.</p>
+            </header>
+
+            <main class="page-main page-main-wide">
+
+                <div id="gallery-items" class="gallery-grid"></div>
+
+                <h2 class="dua-category-title">More Landmarks</h2>
+                <p class="prayerbook-intro">These photos are hosted directly on Wikimedia Commons — linking out here keeps attribution unambiguous.</p>
+                <div id="gallery-links" class="gallery-links-grid"></div>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="gallery-data.js"></script>
+    <script src="gallery.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waqt — Prayer Times</title>
+    <meta name="description" content="Clean, fast, accurate prayer times for your location — Fajr, Dhuhr, Asr, Maghrib, and Isha.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="home">
+
+    <div class="app-layout">
+
+        <!-- Sidebar navigation -->
+        <div id="sidebar-placeholder"></div>
+        <script src="sidebar.js"></script>
+
+        <!-- Main content -->
+        <div class="content-area">
+
+    <header class="app-header">
+        <div class="header-inner">
+            <h1 class="app-name">Waqt</h1>
+            <p class="app-tagline">وقت &middot; Time for prayer</p>
+        </div>
+    </header>
+
+    <main class="app-main">
+
+        <!-- Location controls -->
+        <section class="location-bar">
+            <div class="location-display" id="location-display">
+                <span class="location-icon">📍</span>
+                <span id="location-text">Detecting your location…</span>
+            </div>
+            <div class="location-actions">
+                <button id="detect-btn" class="btn-link">Use my location</button>
+                <span class="divider">|</span>
+                <button id="manual-toggle-btn" class="btn-link">Enter city</button>
+            </div>
+        </section>
+
+        <!-- Manual city entry (hidden by default) -->
+        <section class="manual-location-form" id="manual-form" hidden>
+            <input type="text" id="city-input" placeholder="City (e.g. Islamabad)">
+            <input type="text" id="country-input" placeholder="Country (e.g. Pakistan)">
+            <button id="manual-submit-btn" class="btn-primary">Set Location</button>
+        </section>
+
+        <!-- Date display -->
+        <section class="date-bar" id="date-bar">
+            <span id="gregorian-date">—</span>
+            <span class="date-sep">&middot;</span>
+            <span id="hijri-date">—</span>
+        </section>
+
+        <!-- Next prayer — signature mihrab-arch card -->
+        <section class="next-prayer-wrap" id="prayer-times">
+            <div class="mihrab-card" id="next-prayer-card">
+                <p class="next-prayer-label">Next Prayer</p>
+                <h2 class="next-prayer-name" id="next-prayer-name">—</h2>
+                <p class="next-prayer-countdown" id="next-prayer-countdown">—</p>
+                <p class="next-prayer-time" id="next-prayer-time">—</p>
+            </div>
+        </section>
+
+        <!-- All prayer times grid -->
+        <section class="timings-grid" id="timings-grid" aria-live="polite">
+            <!-- populated by JS -->
+        </section>
+
+        <!-- Calculation method -->
+        <section class="settings-bar">
+            <div class="setting-row">
+                <label for="method-select">Calculation method</label>
+                <select id="method-select">
+                    <option value="1">University of Islamic Sciences, Karachi</option>
+                    <option value="2">Islamic Society of North America (ISNA)</option>
+                    <option value="3">Muslim World League</option>
+                    <option value="4">Umm Al-Qura University, Makkah</option>
+                    <option value="5">Egyptian General Authority of Survey</option>
+                </select>
+            </div>
+            <div class="setting-row">
+                <label for="school-select">Asr juristic method</label>
+                <select id="school-select">
+                    <option value="0">Shafi / Maliki / Hanbali (standard)</option>
+                    <option value="1">Hanafi (later Asr)</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Monthly timetable -->
+        <section class="monthly-section">
+            <button id="monthly-toggle-btn" class="btn-secondary">View Monthly Timetable</button>
+            <div id="monthly-wrap" class="monthly-wrap" hidden>
+                <h3 class="monthly-title" id="monthly-title">—</h3>
+                <div class="monthly-table-scroll">
+                    <table class="monthly-table" id="monthly-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Fajr</th>
+                                <th>Sunrise</th>
+                                <th>Dhuhr</th>
+                                <th>Asr</th>
+                                <th>Maghrib</th>
+                                <th>Isha</th>
+                            </tr>
+                        </thead>
+                        <tbody id="monthly-tbody">
+                            <!-- populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="app-footer">
+        <p>Prayer times may vary slightly from your local mosque. Data via <a href="https://aladhan.com" target="_blank" rel="noopener noreferrer">AlAdhan API</a>.</p>
+    </footer>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

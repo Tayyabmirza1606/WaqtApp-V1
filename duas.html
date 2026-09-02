@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duas | Waqt</title>
+    <meta name="description" content="Common daily duas with Arabic text, transliteration, and translation, verified against authentic sources.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Amiri+Quran&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="duas">
+
+    <div class="app-layout">
+
+        <div id="sidebar-placeholder"></div>
+        <script src="sidebar.js"></script>
+
+        <div class="content-area">
+
+            <header class="page-hero">
+                <h1 class="page-hero-title">Duas</h1>
+                <p class="page-hero-sub">Common daily supplications from the Sunnah, with Arabic, transliteration, and translation.</p>
+            </header>
+
+            <main class="page-main page-main-wide">
+
+                <nav id="dua-category-nav" class="dua-category-nav"></nav>
+
+                <div id="duas-container">
+                    <!-- populated by duas.js from duas-data.js -->
+                </div>
+
+                <p class="dua-disclaimer">More categories are being added regularly. Every dua here is checked against authentic sources (Sahih al-Bukhari, Sahih Muslim, At-Tirmidhi, Abu Dawud, Ibn Majah, or the Quran) before being included — but if you notice any error, please verify against a trusted source such as Hisnul Muslim before relying on it for worship.</p>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="duas-data.js"></script>
+    <script src="duas.js"></script>
+</body>
+</html>

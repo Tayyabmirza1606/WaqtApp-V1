@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al Quran | Waqt</title>
+    <meta name="description" content="Read the Quran surah by surah with tajweed coloring, ayah audio, and English translation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Amiri+Quran&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="quran">
+
+    <div class="app-layout">
+
+        <div id="sidebar-placeholder"></div>
+        <script src="sidebar.js"></script>
+
+        <div class="content-area">
+
+            <header class="page-hero">
+                <h1 class="page-hero-title">Al Quran</h1>
+                <p class="page-hero-sub">Arabic with tajweed colors, ayah-by-ayah audio, and Saheeh International translation.</p>
+            </header>
+
+            <main class="page-main page-main-wide">
+
+                <div class="quran-picker">
+                    <select id="surah-select" aria-label="Choose a surah">
+                        <option value="">Loading surahs…</option>
+                    </select>
+                    <select id="reciter-select" aria-label="Choose a reciter"></select>
+                    <button id="load-surah-btn" class="btn-primary">Read</button>
+                </div>
+
+                <div class="quran-tools">
+                    <label class="quran-toggle">
+                        <input type="checkbox" id="tajweed-toggle" checked>
+                        <span>Tajweed colors</span>
+                    </label>
+                    <button type="button" id="tajweed-legend-btn" class="btn-link">Tajweed key</button>
+                </div>
+
+                <div id="tajweed-legend" class="tajweed-legend" hidden>
+                    <p class="tajweed-legend-title">Tajweed key</p>
+                    <ul class="tajweed-legend-list">
+                        <li><span class="tajweed-swatch ham_wasl"></span> Hamzat ul Wasl / silent / lam shamsiyyah</li>
+                        <li><span class="tajweed-swatch madda_normal"></span> Madd (normal)</li>
+                        <li><span class="tajweed-swatch madda_permissible"></span> Madd (permissible)</li>
+                        <li><span class="tajweed-swatch madda_necessary"></span> Madd (necessary)</li>
+                        <li><span class="tajweed-swatch madda_obligatory"></span> Madd (obligatory)</li>
+                        <li><span class="tajweed-swatch qalaqah"></span> Qalqalah</li>
+                        <li><span class="tajweed-swatch ghunnah"></span> Ghunnah</li>
+                        <li><span class="tajweed-swatch ikhafa"></span> Ikhfa</li>
+                        <li><span class="tajweed-swatch ikhafa_shafawi"></span> Ikhfa shafawi</li>
+                        <li><span class="tajweed-swatch iqlab"></span> Iqlab</li>
+                        <li><span class="tajweed-swatch idgham_ghunnah"></span> Idgham with ghunnah</li>
+                        <li><span class="tajweed-swatch idgham_wo_ghunnah"></span> Idgham without ghunnah</li>
+                        <li><span class="tajweed-swatch idgham_shafawi"></span> Idgham shafawi</li>
+                    </ul>
+                </div>
+
+                <div id="surah-content" class="surah-content"></div>
+
+                <audio id="ayah-audio" preload="none"></audio>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="quran.js"></script>
+</body>
+</html>

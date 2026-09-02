@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hadith | Waqt</title>
+    <meta name="description" content="Browse Sahih al-Bukhari and Sahih Muslim by book and chapter, with search by number or text.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Amiri+Quran&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="hadith">
+
+    <div class="app-layout">
+
+        <div id="sidebar-placeholder"></div>
+        <script src="sidebar.js"></script>
+
+        <div class="content-area">
+
+            <header class="page-hero">
+                <h1 class="page-hero-title">Hadith</h1>
+                <p class="page-hero-sub">Browse by book and chapter, or search directly.</p>
+            </header>
+
+            <main class="page-main page-main-wide">
+
+                <div class="hadith-picker">
+                    <select id="collection-select">
+                        <option value="bukhari">Sahih al-Bukhari</option>
+                        <option value="muslim">Sahih Muslim</option>
+                    </select>
+                </div>
+
+                <div class="hadith-search-bar">
+                    <input type="text" id="hadith-search-input" placeholder="Search by hadith number or keyword (optional)…">
+                </div>
+
+                <!-- Breadcrumb: shown only when viewing a specific chapter -->
+                <div id="hadith-breadcrumb" class="hadith-breadcrumb" hidden>
+                    <button id="back-to-chapters-btn" class="btn-link">← Back to all chapters</button>
+                </div>
+
+                <p class="hadith-status" id="hadith-status">Loading chapters…</p>
+
+                <!-- View 1: list of chapters/books for the selected collection -->
+                <div id="chapter-list" class="chapter-list"></div>
+
+                <!-- View 2: hadiths within a selected chapter, or search results -->
+                <div id="hadith-list" class="hadith-list"></div>
+
+                <button id="load-more-btn" class="btn-secondary" hidden>Load More</button>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="hadith.js"></script>
+</body>
+</html>
