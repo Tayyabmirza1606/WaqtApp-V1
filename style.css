@@ -1024,15 +1024,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .surah-bismillah {
     font-family: var(--display-font);
     font-size: 2em;
-    color: var(--green);
+    color: var(--cream);
     text-align: center;
-    margin-bottom: 4px;
+    line-height: 1.2;
+    margin-bottom: 2px;
 }
 
 .surah-bismillah-translation {
-    color: var(--ink-soft);
+    color: rgba(250, 246, 236, 0.78);
     text-align: center;
-    margin-bottom: 16px;
+    font-size: 0.85em;
+    margin-bottom: 8px;
 }
 
 .quran-tools {
@@ -1097,8 +1099,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     background: var(--green);
     color: var(--cream);
     border-radius: 10px;
-    padding: 24px;
-    margin-bottom: 24px;
+    padding: 14px 20px 16px;
+    margin-bottom: 16px;
 }
 
 .surah-arabic-name {

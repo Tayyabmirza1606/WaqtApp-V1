@@ -180,7 +180,7 @@ function renderSurah(scrollToFirstAyah = false) {
     container.innerHTML = header + ayahs;
 
     if (scrollToFirstAyah) {
-        container.querySelector(".ayah-block")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        container.querySelector(".surah-header")?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 }
 
