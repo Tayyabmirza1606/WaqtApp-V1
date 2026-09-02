@@ -124,11 +124,23 @@ async function loadSurah(surahNumber, scrollToFirstAyah = false) {
             throw new Error("Unexpected API response");
         }
 
+        const hasNumberedBismillah = Number(surahNumber) === 1;
         loadedSurah = {
             tajweed: data.data[0],
             english: data.data[1],
             urdu: data.data[2],
+            bismillah: {
+                arabic: hasNumberedBismillah ? data.data[0].ayahs[0].text : "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ",
+                english: hasNumberedBismillah ? data.data[1].ayahs[0].text : "In the name of Allah, the Most Gracious, the Most Merciful.",
+                urdu: hasNumberedBismillah ? data.data[2].ayahs[0].text : "اللہ کے نام سے جو نہایت مہربان، ہمیشہ رحم فرمانے والا ہے۔",
+            },
         };
+
+        if (hasNumberedBismillah) {
+            loadedSurah.tajweed.ayahs = loadedSurah.tajweed.ayahs.slice(1);
+            loadedSurah.english.ayahs = loadedSurah.english.ayahs.slice(1);
+            loadedSurah.urdu.ayahs = loadedSurah.urdu.ayahs.slice(1);
+        }
         renderSurah(scrollToFirstAyah);
     } catch (err) {
         console.error("Failed to load surah:", err);
@@ -150,13 +162,21 @@ function renderSurah(scrollToFirstAyah = false) {
         <div class="surah-header">
             <h2 class="surah-arabic-name">${escapeHtml(tajweed.name)}</h2>
             <p class="surah-english-name">${escapeHtml(tajweed.englishName)} — ${escapeHtml(tajweed.englishNameTranslation)}</p>
-            <p class="surah-meta">${revelationPlace} &middot; ${tajweed.numberOfAyahs} verses</p>
-            <p class="surah-bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
-            <p class="surah-bismillah-translation">${getWaqtLanguage() === "urdu" ? "اللہ کے نام سے جو نہایت مہربان، ہمیشہ رحم فرمانے والا ہے۔" : "In the name of Allah, the Most Gracious, the Most Merciful."}</p>
+            <p class="surah-meta">${revelationPlace} &middot; ${tajweed.ayahs.length} verses</p>
             <div class="surah-audio-actions">
                 <button type="button" id="play-surah-btn" class="btn-primary">Play surah</button>
                 <button type="button" id="stop-audio-btn" class="btn-secondary surah-stop-btn">Stop</button>
             </div>
+        </div>
+    `;
+
+    const bismillahTranslation = getWaqtLanguage() === "urdu"
+        ? loadedSurah.bismillah.urdu
+        : loadedSurah.bismillah.english;
+    const bismillah = `
+        <div class="ayah-bismillah">
+            <p class="surah-bismillah">${parseTajweed(loadedSurah.bismillah.arabic)}</p>
+            <p class="surah-bismillah-translation">${escapeHtml(bismillahTranslation)}</p>
         </div>
     `;
 
@@ -169,16 +189,16 @@ function renderSurah(scrollToFirstAyah = false) {
         return `
             <div class="ayah-block" data-ayah-index="${i}" data-ayah-number="${ayah.number}">
                 <div class="ayah-toolbar">
-                    <button type="button" class="ayah-play-btn" data-play-index="${i}" aria-label="Play ayah ${ayah.numberInSurah}">▶</button>
-                    <span class="ayah-toolbar-label">Ayah ${ayah.numberInSurah}</span>
+                    <button type="button" class="ayah-play-btn" data-play-index="${i}" aria-label="Play ayah ${i + 1}">▶</button>
+                    <span class="ayah-toolbar-label">Ayah ${i + 1}</span>
                 </div>
-                <p class="ayah-arabic">${arabicHtml} <span class="ayah-number">﴿${ayah.numberInSurah}﴾</span></p>
+                <p class="ayah-arabic">${arabicHtml} <span class="ayah-number">﴿${i + 1}﴾</span></p>
                 <p class="ayah-translation">${escapeHtml(ayahTranslation)}</p>
             </div>
         `;
     }).join("");
 
-    container.innerHTML = header + ayahs;
+    container.innerHTML = header + bismillah + ayahs;
 
     if (scrollToFirstAyah) {
         container.querySelector(".surah-header")?.scrollIntoView({ behavior: "smooth", block: "start" });

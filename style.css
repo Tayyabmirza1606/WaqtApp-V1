@@ -1037,6 +1037,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     margin-bottom: 8px;
 }
 
+.ayah-bismillah {
+    background: #fff;
+    border: 1px solid var(--sand);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.ayah-bismillah .surah-bismillah {
+    color: var(--green);
+    margin-bottom: 4px;
+}
+
 .quran-tools {
     display: flex;
     align-items: center;
