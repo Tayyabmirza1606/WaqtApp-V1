@@ -117,10 +117,10 @@ async function loadSurah(surahNumber, scrollToFirstAyah = false) {
 
     try {
         const response = await fetch(
-            `${QURAN_API_BASE}/surah/${surahNumber}/editions/quran-tajweed,en.sahih,ur.jalandhry`
+            `${QURAN_API_BASE}/surah/${surahNumber}/editions/quran-tajweed,en.sahih,ur.jalandhry,en.transliteration`
         );
         const data = await response.json();
-        if (data.code !== 200 || !Array.isArray(data.data) || data.data.length < 3) {
+        if (data.code !== 200 || !Array.isArray(data.data) || data.data.length < 4) {
             throw new Error("Unexpected API response");
         }
 
@@ -129,10 +129,12 @@ async function loadSurah(surahNumber, scrollToFirstAyah = false) {
             tajweed: data.data[0],
             english: data.data[1],
             urdu: data.data[2],
+            transliteration: data.data[3],
             bismillah: {
                 arabic: hasNumberedBismillah ? data.data[0].ayahs[0].text : "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ",
                 english: hasNumberedBismillah ? data.data[1].ayahs[0].text : "In the name of Allah, the Most Gracious, the Most Merciful.",
                 urdu: hasNumberedBismillah ? data.data[2].ayahs[0].text : "اللہ کے نام سے جو نہایت مہربان، ہمیشہ رحم فرمانے والا ہے۔",
+                transliteration: hasNumberedBismillah ? data.data[3].ayahs[0].text : "Bismillahir-Rahmanir-Rahim",
             },
         };
 
@@ -140,6 +142,7 @@ async function loadSurah(surahNumber, scrollToFirstAyah = false) {
             loadedSurah.tajweed.ayahs = loadedSurah.tajweed.ayahs.slice(1);
             loadedSurah.english.ayahs = loadedSurah.english.ayahs.slice(1);
             loadedSurah.urdu.ayahs = loadedSurah.urdu.ayahs.slice(1);
+            loadedSurah.transliteration.ayahs = loadedSurah.transliteration.ayahs.slice(1);
         }
         renderSurah(scrollToFirstAyah);
     } catch (err) {
@@ -176,7 +179,8 @@ function renderSurah(scrollToFirstAyah = false) {
     const bismillah = `
         <div class="ayah-bismillah">
             <p class="surah-bismillah">${parseTajweed(loadedSurah.bismillah.arabic)}</p>
-            <p class="surah-bismillah-translation ${getWaqtLanguage() === "urdu" ? "translation-urdu" : ""}">${escapeHtml(bismillahTranslation)}</p>
+            <p class="dua-transliteration">${escapeHtml(loadedSurah.bismillah.transliteration)}</p>
+            <p class="quran-translation surah-bismillah-translation ${getWaqtLanguage() === "urdu" ? "translation-urdu" : ""}">${escapeHtml(bismillahTranslation)}</p>
         </div>
     `;
 
@@ -185,6 +189,9 @@ function renderSurah(scrollToFirstAyah = false) {
             ? parseTajweed(ayah.text)
             : escapeHtml(stripTajweedMarkup(ayah.text));
         const ayahTranslation = translation.ayahs[i] ? translation.ayahs[i].text : "";
+        const ayahTransliteration = loadedSurah.transliteration.ayahs[i]
+            ? loadedSurah.transliteration.ayahs[i].text
+            : "";
 
         return `
             <div class="ayah-block" data-ayah-index="${i}" data-ayah-number="${ayah.number}">
@@ -193,7 +200,8 @@ function renderSurah(scrollToFirstAyah = false) {
                     <span class="ayah-toolbar-label">Ayah ${i + 1}</span>
                 </div>
                 <p class="ayah-arabic">${arabicHtml} <span class="ayah-number">﴿${i + 1}﴾</span></p>
-                <p class="ayah-translation ${getWaqtLanguage() === "urdu" ? "translation-urdu" : ""}">${escapeHtml(ayahTranslation)}</p>
+                <p class="dua-transliteration">${escapeHtml(ayahTransliteration)}</p>
+                <p class="quran-translation ayah-translation ${getWaqtLanguage() === "urdu" ? "translation-urdu" : ""}">${escapeHtml(ayahTranslation)}</p>
             </div>
         `;
     }).join("");

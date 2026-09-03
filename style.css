@@ -20,7 +20,6 @@
 body {
     font-family: var(--body-font);
     background: var(--cream);
-    color: var(--ink);
     line-height: 1.6;
 }
 
@@ -1022,7 +1021,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .surah-bismillah {
-    font-family: var(--display-font);
+    font-family: 'Amiri Quran', var(--display-font);
     font-size: 1.6em;
     color: var(--cream);
     text-align: center;
@@ -1033,8 +1032,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .surah-bismillah-translation {
     color: rgba(250, 246, 236, 0.78);
     text-align: center;
-    font-size: 0.85em;
+    font-size: 0.95em;
     margin-bottom: 8px;
+}
+
+.quran-translation {
+    font-family: var(--body-font);
+    font-size: 1em;
+    line-height: 1.6;
 }
 
 .ayah-bismillah {
@@ -1048,7 +1053,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .ayah-bismillah .surah-bismillah {
     color: var(--green);
-    margin-bottom: 4px;
+    margin-bottom: 16px;
+}
+
+.ayah-bismillah .surah-bismillah-translation {
+    color: var(--ink-soft);
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+.ayah-bismillah .dua-transliteration {
+    margin-bottom: 12px;
 }
 
 .quran-tools {
@@ -1212,6 +1227,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .translation-urdu {
     direction: rtl;
     text-align: right;
+    font-size: 1.1em;
+    line-height: 1.9;
 }
 
 /* Official AlQuran Cloud tajweed colors */
@@ -1308,11 +1325,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .chapter-title {
     font-family: var(--display-font);
     color: var(--green);
-    font-size: 1.05em;
+    font-size: 1.25em;
+    font-weight: 700;
 }
 
 .chapter-meta {
-    font-size: 0.78em;
+    font-size: 0.9em;
     color: var(--ink-soft);
 }
 
@@ -1637,8 +1655,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .dua-arabic {
     margin: 0 0 14px;
-    font-family: "Amiri Quran", "Amiri", serif;
-    font-size: clamp(1.55rem, 2.2vw, 2rem);
+    font-family: 'Amiri Quran', var(--display-font);
+    font-size: 1.5em;
     line-height: 2;
     text-align: right;
     direction: rtl;
@@ -1664,6 +1682,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     font-size: 0.86rem;
     line-height: 1.55;
     opacity: 0.78;
+}
+
+.dua-translation.translation-urdu {
+    font-size: 1.1rem;
+    line-height: 1.9;
 }
 
 .dua-disclaimer {
@@ -1694,8 +1717,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     }
 
     .dua-arabic {
-        font-size: 1.45rem;
-        line-height: 1.9;
+        font-size: 1.3em;
+        line-height: 2;
     }
 }
 
@@ -1764,8 +1787,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .dua-arabic {
     margin: 0 0 14px;
-    font-family: "Amiri Quran", "Amiri", serif;
-    font-size: clamp(1.55rem, 2.2vw, 2rem);
+    font-family: 'Amiri Quran', var(--display-font);
+    font-size: 1.5em;
     line-height: 2;
     text-align: right;
     direction: rtl;
@@ -1821,8 +1844,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     }
 
     .dua-arabic {
-        font-size: 1.45rem;
-        line-height: 1.9;
+        font-size: 1.3em;
+        line-height: 2;
     }
 }
 
